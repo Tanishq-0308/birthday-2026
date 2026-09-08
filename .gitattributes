@@ -1,0 +1,16 @@
+# core.autocrlf=true is set on this machine. Force media to be stored byte-for-byte
+# so line-ending conversion can never corrupt an image or the mp3.
+*.mp3 binary
+*.m4a binary
+*.ogg binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.svg text eol=lf
+
+# keep web sources with LF in the repo
+*.html text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+*.json text eol=lf
+*.md   text eol=lf

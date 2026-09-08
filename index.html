@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- fixed photo backdrop, shared by every scene -->
+<div class="bg-photo" aria-hidden="true"></div>
+
+<div class="bg-tint" aria-hidden="true"></div>
+
+<!-- drifting background shapes -->
+<div class="bg-drift" id="bgDrift" aria-hidden="true"></div>
+
+<!-- music toggle -->
+<button class="music-btn" id="musicBtn" aria-label="Toggle music" title="Music">
+  <span id="musicIcon">♪</span>
+</button>
+<!-- Drop a track at assets/music.mp3 (or .m4a / .ogg — whichever you have).
+     The browser plays the first one it finds; missing files are skipped. -->
+<audio id="bgm" loop preload="auto">
+  <source src="assets/music.mp3" type="audio/mpeg">
+  <source src="assets/music.m4a" type="audio/mp4">
+  <source src="assets/music.ogg" type="audio/ogg">
+</audio>
+
+<!-- candle progress -->
+<div class="progress" id="progress" aria-label="Progress">
+  <span class="pip" data-pip="0">🕯</span>
+  <span class="pip" data-pip="1">🕯</span>
+  <span class="pip" data-pip="2">🕯</span>
+  <span class="pip" data-pip="3">🕯</span>
+</div>
+
+<main id="stage">
+
+  <!-- 1. LANDING (scrolling intro) -->
+  <section class="scene scrolly" id="scene-landing">
+
+    <div class="hero">
+      <p class="eyebrow">today is the day</p>
+      <h1 class="display" id="landingName">…</h1>
+      <p class="lede">Happy <span id="landingAge">…</span><sup id="landingSuffix">th</sup> Birthday</p>
+      <div class="scroll-cue" aria-hidden="true"><span>scroll</span><i></i></div>
+    </div>
+
+    <!-- story panels are built from STORY in content.js -->
+    <div class="story" id="story"></div>
+
+    <div class="hero outro">
+      <p class="sub">There are a few little games first —<br>get through them and you'll find your cake.</p>
+      <button class="btn" data-go="quiz">Begin ♡</button>
+    </div>
+
+  </section>
+
+  <!-- 2. QUIZ -->
+  <section class="scene" id="scene-quiz">
+    <div class="stack">
+      <p class="eyebrow">one of four</p>
+      <h2 class="display sm">how well do you remember?</h2>
+      <div class="card quiz-card">
+        <p class="quiz-count" id="quizCount"></p>
+        <p class="quiz-q" id="quizQ"></p>
+        <div class="quiz-options" id="quizOptions"></div>
+        <p class="quiz-note" id="quizNote"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. BALLOONS -->
+  <section class="scene" id="scene-balloons">
+    <div class="stack">
+      <p class="eyebrow">two of four</p>
+      <h2 class="display sm">Pop them all</h2>
+      <p class="sub">there's a name hiding underneath</p>
+      <div class="balloon-field" id="balloonField"></div>
+      <p class="revealed" id="balloonReveal"></p>
+    </div>
+  </section>
+
+  <!-- 4. MEMORY -->
+  <section class="scene" id="scene-memory">
+    <div class="stack">
+      <p class="eyebrow">three of four</p>
+      <h2 class="display sm">Find the pairs</h2>
+      <p class="sub" id="memoryStatus">six pairs, take your time</p>
+      <div class="memory-grid" id="memoryGrid"></div>
+    </div>
+  </section>
+
+  <!-- 5. CANDLES -->
+  <section class="scene" id="scene-candles">
+    <div class="stack">
+      <p class="eyebrow">last one</p>
+      <h2 class="display sm">Blow out the candles</h2>
+      <p class="sub" id="candleHint">blow into your mic — or just tap each flame</p>
+      <div class="cake" id="cake">
+        <div class="cake-candles" id="cakeCandles"></div>
+        <div class="cake-tier tier-top"></div>
+        <div class="cake-tier tier-mid"></div>
+        <div class="cake-tier tier-base"></div>
+        <div class="cake-plate"></div>
+      </div>
+      <button class="btn ghost" id="micBtn">use my microphone</button>
+    </div>
+  </section>
+
+  <!-- 6. REVEAL -->
+  <section class="scene" id="scene-reveal">
+    <div class="stack">
+      <h2 class="display" id="revealTitle">Make a wish</h2>
+      <div class="cake big" id="cakeReveal">
+        <div class="cake-candles" id="revealCandles"></div>
+        <div class="cake-tier tier-top"></div>
+        <div class="cake-tier tier-mid"></div>
+        <div class="cake-tier tier-base"></div>
+        <div class="cake-plate"></div>
+      </div>
+      <p class="sub">happy birthday, <span id="revealName"></span> ♡</p>
+      <button class="btn" data-go="letter">Read your letter</button>
+    </div>
+  </section>
+
+  <!-- 7. LETTER -->
+  <section class="scene" id="scene-letter">
+    <div class="stack">
+      <div class="paper">
+        <div class="letter-body" id="letterBody"></div>
+      </div>
+      <div class="row">
+        <button class="btn ghost" id="letterSkip">show it all</button>
+        <button class="btn" data-go="photos" id="letterNext" hidden>See our photos →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. PHOTOS -->
+  <section class="scene" id="scene-photos">
+    <div class="stack wide">
+      <h2 class="display sm">2022 — now</h2>
+      <div class="polaroid-wall" id="polaroidWall"></div>
+      <p class="sub">happy birthday, <span id="outroName"></span>. thank you for coming back. ♡</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- lightbox -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
+  <figure><img id="lightboxImg" alt=""><figcaption id="lightboxCap"></figcaption></figure>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.4/confetti.min.js"></script>
+<script src="js/content.js"></script>
+<script src="js/games.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
