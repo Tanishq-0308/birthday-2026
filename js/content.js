@@ -88,7 +88,7 @@ const STORY = [
     text: "a year and a half of talking. never in person, not once. just words on a screen, every day, until they became the best part of it.",
   },
   {
-    img: "assets/story/s3.jpg",
+    img: "assets/story/s3-temple.jpg",
     wide: true,          // this panel runs wider than the rest
     title: "the temple",
     text: "you finished work and I came to see you. we went to the temple. after all that time, you were finally standing in front of me.",
@@ -109,7 +109,7 @@ const STORY = [
     text: "and then you were back. we've never been closer than we are now. I'm not letting that go again.",
   },
   {
-    img: "assets/story/s7.jpg",
+    img: "assets/story/s7-last.jpg",
     title: "so — happy birthday",
     text: "keep scrolling. I made you something. ♡",
   },
